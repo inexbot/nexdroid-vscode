@@ -1,5 +1,5 @@
 {
-  ".source.nexdroid": {
+  ".source.JBR": {
     "Create": {
       "prefix": "begin",
       "body": [
@@ -20,42 +20,60 @@
       "description": "初始化文件"
     },
     "Position": {
-      "prefix": "p",
+      "prefix": "P",
       "body": "P${1:序号} = ${2:坐标系},${3:0}",
       "description": "P点"
     },
     "MOVJ": {
-      "prefix": "movj",
-      "body": "MOVJ ${1:P001} VJ = ${2:10} PL = ${3:0}",
-      "description": "MOVJ指令"
+      "prefix": "MOVJ",
+      "body": "MOVJ ${1:P001} VJ = ${2:10} % PL = ${3:0} ACC = 10 DEC = 10 0",
+      "description": "MOVJ指令，关节插补运动\nMOVJ 位置 VJ = 速度1-100 % PL = 平滑过渡等级0-5 ACC = 加速度1-100 DEC = 减速度1-100 提前执行下面指令的时间(毫秒),0表示不提前"
     },
     "MOVL": {
-      "prefix": "movl",
-      "body": "MOVJ ${1:P001} V = ${2:10} PL = ${3:0}",
-      "description": "MOVL指令"
+      "prefix": "MOVL",
+      "body": "MOVJ ${1:P001} V = ${2:10} mm/s PL = ${3:0} ACC = 10 DEC = 10 0",
+      "description": "MOVL指令，直线插补运动\nMOVL 位置 V = 速度1-9999 mm/s PL = 平滑过渡等级0-5 ACC = 加速度1-100 DEC = 减速度1-100 提前执行下面指令的时间(毫秒),0表示不提前"
     },
     "MOVC": {
-      "prefix": "movc",
-      "body": "MOVC ${1:P001} V = ${2:10} PL = ${3:0}",
-      "description": "MOVC指令"
+      "prefix": "MOVC",
+      "body": "MOVJ ${1:P001} V = ${2:10} mm/s PL = ${3:0} ACC = 10 DEC = 10 0",
+      "description": "MOVC指令，圆弧插补运动\nMOVC 位置 V = 速度1-9999 mm/s PL = 平滑过渡等级0-5 ACC = 加速度1-100 DEC = 减速度1-100 提前执行下面指令的时间(毫秒),0表示不提前"
     },
     "MOVCA": {
-      "prefix": "movca",
-      "body": "MOVCA ${1:P001} V = ${2:10} PL = ${3:0}",
-      "description": "MOVCA指令"
+      "prefix": "MOVCA",
+      "body": "MOVJ ${1:P001} V = ${2:10} mm/s PL = ${3:0} ACC = 10 DEC = 10 SPIN = 0 0",
+      "description": "MOVCA指令，整圆插补运动\nMOVCA 位置 V = 速度1-9999 mm/s PL = 平滑过渡等级0-5 ACC = 加速度1-100 DEC = 减速度1-100 SPIN = 圆类型,0-姿态不变,1-六轴不转,2-六轴旋转 提前执行下面指令的时间(毫秒),0表示不提前"
     },
     "MOVS": {
-      "prefix": "movs",
-      "body": "MOVJ ${1:P001} V = ${2:10} PL = ${3:0}",
+      "prefix": "MOVS",
+      "body": "MOVJ ${1:P001} V = ${2:10} mm/s PL = ${3:0} ACC = 10 DEC = 10 0",
       "description": "MOVS指令"
     },
     "IF": {
-      "prefix": "if",
-      "body": ["IF (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDIF"]
+      "prefix": "IF",
+      "body": ["IF (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDIF"],
+      "description":"IF判断指令，需搭配ENDIF使用，若删除IF请一并删除ENDIF"
     },
     "WHILE": {
-      "prefix": "while",
-      "body": ["WHILE (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDWHILE"]
+      "prefix": "WHILE",
+      "body": ["WHILE (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDWHILE"],
+      "description":"WHILE循环指令，需搭配ENDWHILE使用，若删除WHILE请一并删除ENDWHILE"
+    },
+    "JUMP": {
+      "prefix": "JUMP",
+      "body": [
+        "LABEL *${1:label1}",
+        "JUMP *${1:label1} WHEN (${2:GI001 == 0})"
+      ],
+      "description": "JUMP指令，跳转到指定行，搭配LABEL使用。若不需要判断条件，可以将WHEN以及后面的条件删掉"
+    },
+    "UNTIL":{
+      "prefix":"UNTIL",
+      "body":[
+        "UNTIL (${1:I001 == 0})",
+        "ENDUNTIL"
+      ],
+      "description":"UNTIL指令，当条件满足则调到ENDUNTIL下面一行执行"
     }
   }
 }

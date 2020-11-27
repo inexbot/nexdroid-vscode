@@ -3,6 +3,12 @@
   "name": "nexdroid",
   "patterns": [
     {
+      "include": "#comments"
+    },
+    {
+      "include": "#nopandend"
+    },
+    {
       "include": "#keywords"
     },
     {
@@ -19,6 +25,22 @@
     }
   ],
   "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.nexdroid",
+          "match": "//[^\n]**"
+        }
+      ]
+    },
+    "nopandend": {
+      "patterns": [
+        {
+          "name": "markup.heading.nexdroid",
+          "match": "\\b(NOP|END)\\b"
+        }
+      ]
+    },
     "keywords": {
       "patterns": [
         {
@@ -31,7 +53,11 @@
       "patterns": [
         {
           "name": "keyword.control.nexdroid",
-          "match": "\\b(IF|WHILE|ENDIF|ENDWHILE)\\b"
+          "match": "\\b(IF|ELSEIF|ELSE|WHILE|ENDIF|ENDWHILE|JUMP|LABEL|UNTIL|ENDUNTIL|CLKSTART|CLKSTOP|CLKRESET)\\b"
+        },
+        {
+          "name": "keyword.other.nexdroid",
+          "match": "\\b(TIMER|WAIT|CALL)\\b"
         }
       ]
     },
@@ -46,11 +72,15 @@
     "variables": {
       "patterns": [
         {
-          "name": "constant.numeric.nexdroid",
+          "name": "storage.type.nexdroid",
+          "match": "^[P,I,B,D,S][0-9][0-9][1-9]"
+        },
+        {
+          "name": "variable.parameter.nexdroid",
           "match": "[G,P][0-9][0-9][1-9]"
         },
         {
-          "name": "constant.numeric.nexdroid",
+          "name": "variable.parameter.nexdroid",
           "match": "[G]?[I,B,D][0-9][0-9][1-9]"
         }
       ]
