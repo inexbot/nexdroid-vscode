@@ -1,0 +1,61 @@
+{
+  ".source.nexdroid": {
+    "Create": {
+      "prefix": "begin",
+      "body": [
+        "//DIR",
+        "//JOB",
+        "//NAME YT",
+        "//POS",
+        "///POSTYPE PULSE",
+        "///PULSE",
+        "${1://局部变量\nP001 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0\nP002 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0}",
+        "//INSTRUCTION",
+        "ROBOTTYPE = [${2:机器人类型}]",
+        "PROVERSION = [1.0.1]",
+        "NOP",
+        "${3://指令}",
+        "END"
+      ],
+      "description": "初始化文件"
+    },
+    "Position": {
+      "prefix": "p",
+      "body": "P${1:序号} = ${2:坐标系},${3:0}",
+      "description": "P点"
+    },
+    "MOVJ": {
+      "prefix": "movj",
+      "body": "MOVJ ${1:P001} VJ = ${2:10} PL = ${3:0}",
+      "description": "MOVJ指令"
+    },
+    "MOVL": {
+      "prefix": "movl",
+      "body": "MOVJ ${1:P001} V = ${2:10} PL = ${3:0}",
+      "description": "MOVL指令"
+    },
+    "MOVC": {
+      "prefix": "movc",
+      "body": "MOVC ${1:P001} V = ${2:10} PL = ${3:0}",
+      "description": "MOVC指令"
+    },
+    "MOVCA": {
+      "prefix": "movca",
+      "body": "MOVCA ${1:P001} V = ${2:10} PL = ${3:0}",
+      "description": "MOVCA指令"
+    },
+    "MOVS": {
+      "prefix": "movs",
+      "body": "MOVJ ${1:P001} V = ${2:10} PL = ${3:0}",
+      "description": "MOVS指令"
+    },
+    "IF": {
+      "prefix": "if",
+      "body": ["IF (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDIF"]
+    },
+    "WHILE": {
+      "prefix": "while",
+      "body": ["WHILE (${1:GI001} ${2:==} ${3:0})", "${4}", "ENDWHILE"]
+    }
+  }
+}

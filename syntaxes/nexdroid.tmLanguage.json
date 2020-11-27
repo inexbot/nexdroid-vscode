@@ -1,0 +1,71 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "nexdroid",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#controls"
+    },
+    {
+      "include": "#parameters"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "support.function.nexdroid",
+          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|MOVJEXT|MOVLEXT|MOVCEXT)\\b"
+        }
+      ]
+    },
+    "controls": {
+      "patterns": [
+        {
+          "name": "keyword.control.nexdroid",
+          "match": "\\b(IF|WHILE|ENDIF|ENDWHILE)\\b"
+        }
+      ]
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "name": "meta.parameter.type.variable.nexdroid",
+          "match": "(VJ|V|PL)"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "constant.numeric.nexdroid",
+          "match": "[G,P][0-9][0-9][1-9]"
+        },
+        {
+          "name": "constant.numeric.nexdroid",
+          "match": "[G]?[I,B,D][0-9][0-9][1-9]"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.nexdroid",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.nexdroid",
+          "match": "\\\\."
+        }
+      ]
+    }
+  },
+  "scopeName": "source.nexdroid"
+}

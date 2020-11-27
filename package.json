@@ -1,0 +1,41 @@
+{
+  "name": "nexdroid",
+  "displayName": "nexdroid",
+  "publisher": "inexbot",
+  "description": "for JBR file",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nexdroid",
+        "aliases": [
+          "nexdroid"
+        ],
+        "extensions": [
+          ".JBR",
+          ".JBP"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nexdroid",
+        "scopeName": "source.nexdroid",
+        "path": "./syntaxes/nexdroid.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "nexdroid",
+        "path": "./snippets/nexdroid.json"
+      }
+    ]
+  }
+}
