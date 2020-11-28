@@ -192,42 +192,42 @@
     },
     "ADD":{
       "prefix":"ADD",
-      "body":"ADD ${1:I001} {2:0}",
+      "body":"ADD ${1:I001} ${2:0}",
       "description":"变量加上一个数值结果存入原变量，数值可以为变量也可以为常量"
     },
     "SUB":{
       "prefix":"SUB",
-      "body":"SUB ${1:I001} {2:0}",
+      "body":"SUB ${1:I001} ${2:0}",
       "description":"变量减去一个数值结果存入原变量，数值可以为变量也可以为常量"
     },
     "MUL":{
       "prefix":"MUL",
-      "body":"MUL ${1:I001} {2:0}",
+      "body":"MUL ${1:I001} ${2:0}",
       "description":"变量乘以一个数值结果存入原变量，数值可以为变量也可以为常量"
     },
     "DIV":{
       "prefix":"DIV",
-      "body":"DIV ${1:I001} {2:0}",
+      "body":"DIV ${1:I001} ${2:0}",
       "description":"变量除以一个数值结果存入原变量，数值可以为变量也可以为常量"
     },
     "MOD":{
       "prefix":"MOD",
-      "body":"MOD ${1:I001} {2:0}",
+      "body":"MOD ${1:I001} ${2:0}",
       "description":"变量对一个数值取余，结果存入原变量，数值可以为变量也可以为常量"
     },
     "SIN":{
       "prefix":"SIN",
-      "body":"SIN ${1:I001} {2:0}",
+      "body":"SIN ${1:I001} ${2:0}",
       "description":"将一个数值的正弦值存入变量，数值可以为变量也可以为常量"
     },
     "COS":{
       "prefix":"COS",
-      "body":"COS ${1:I001} {2:0}",
+      "body":"COS ${1:I001} ${2:0}",
       "description":"将一个数值的余弦值存入变量，数值可以为变量也可以为常量"
     },
     "ATAN":{
       "prefix":"ATAN",
-      "body":"ATAN ${1:I001} {2:0}",
+      "body":"ATAN ${1:I001} ${2:0}",
       "description":"将一个数值的反切值存入变量，数值可以为变量也可以为常量"
     },
     "LOGICAL_OP":{
