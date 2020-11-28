@@ -104,7 +104,7 @@
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[GP][0-9][0-9][1-9]"
+          "match": "[GPESR][0-9][0-9][1-9]"
         },
         {
           "name": "variable.parameter.nexdroid",
