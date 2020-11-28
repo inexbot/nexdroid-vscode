@@ -2,8 +2,13 @@
   "name": "nexdroid",
   "displayName": "nexdroid",
   "publisher": "inexbot",
-  "description": "for JBR file",
-  "version": "0.0.2",
+  "description": "纳博特机器人程序编辑",
+  "version": "0.0.5",
+  "icon": "logo.png",
+  "galleryBanner": {
+    "color": "#5c2d91",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.51.0"
   },

@@ -12,6 +12,9 @@
       "include": "#keywords"
     },
     {
+      "include": "#calc"
+    },
+    {
       "include": "#variables"
     },
     {
@@ -45,7 +48,7 @@
       "patterns": [
         {
           "name": "support.function.nexdroid",
-          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|MOVJEXT|MOVLEXT|MOVCEXT)\\b"
+          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|SAMOV|MOVJEXT|MOVLEXT|MOVCEXT)\\b"
         }
       ]
     },
@@ -57,31 +60,55 @@
         },
         {
           "name": "keyword.other.nexdroid",
-          "match": "\\b(TIMER|WAIT|CALL)\\b"
+          "match": "\\b(TIMER|WAIT|CALL|SPEED)\\b"
+        },
+        {
+          "name": "keyword.other.nexdroid",
+          "match": "\\b(DIN|DOUT|AIN|AOUT|READ_DOUT|SWITCHTOOL|SWITCHUSER|SWITCHSYNC)\\b"
+        },
+        {
+          "name": "keyword.other.nexdroid",
+          "match": "\\b(SENDMSG|PARSEMSG|READCOMM|OPENMSG|CLOSEMSG|PRINTMSG|MSG_CONN_ST)\\b"
+        },
+        {
+          "name": "keyword.other.nexdroid",
+          "match": "\\b(PTHREAD_START|PTHREAD_END|PAUSERUN|CONTINUERUN|STOPRUN|RESTARTRUN)\\b"
+        }
+      ]
+    },
+    "calc":{
+      "patterns": [
+        {
+          "name": "support.other.nexdroid",
+          "match": "\\b(ADD|SUB|MUL|DIV|MOD|SIN|COS|ATAN|LOGICAL_OP|SETINT|SETDOUBLE|SETBOOL|FORCESET|USERFRAME_SET|TOOLFRAME_SET|READPOS|POSADD|POSSUB|POSSET|COPYPOS|POSADDALL|POSSUBALL|POSSETALL|TOFFSETON|TOFFSETOFF)\\b"
         }
       ]
     },
     "parameters": {
       "patterns": [
         {
-          "name": "meta.parameter.type.variable.nexdroid",
-          "match": "(VJ|V|PL)"
+          "name": "markup.italic.nexdroid",
+          "match": "\\b(VJ|V|PL|ACC|DEC)\\b"
+        },
+        {
+          "name": "variable.parameter.nexdroid",
+          "match": "\\b(RF|BF|TF|UF|TX|UX|TY|UY|TZ|UZ|TA|UA|TB|UB|TC|UC|GLOBAL|LOCAL|MAIN|ALL)\\b"
         }
       ]
     },
     "variables": {
       "patterns": [
         {
-          "name": "storage.type.nexdroid",
-          "match": "^[P,I,B,D,S][0-9][0-9][1-9]"
+          "name": "constant.numeric.nexdroid",
+          "match": "^[PSRE][0-9][0-9][1-9]"
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[G,P][0-9][0-9][1-9]"
+          "match": "[GP][0-9][0-9][1-9]"
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[G]?[I,B,D][0-9][0-9][1-9]"
+          "match": "[G]?[IBD][0-9][0-9][1-9]"
         }
       ]
     },

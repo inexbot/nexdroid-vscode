@@ -9,9 +9,23 @@
         "//POS",
         "///POSTYPE PULSE",
         "///PULSE",
-        "${1://局部变量\nP001 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0\nP002 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0}",
+        "//局部位置变量,P-局部位置变量,E-带外部轴的局部位置变量,R-局部定点变量SAMOV使用,S-增量偏移用局部变量",
+        "//P序号 = 坐标系,角度/弧度,形态,工具号,用户坐标号,预留,预留,1轴,2轴,3轴,4轴,5轴,6轴,7轴",
+        "//坐标系:0-关节坐标系,1-直角坐标系,2-工具坐标系,3-用户坐标系",
+        "//角度/弧度:0-关节坐标系请填0,意为所有的轴坐标为角度值，其它坐标系该值决定姿态值的表示方法",
+        "P001 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "P002 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "//带变位机坐标值的局部位置变量，在P点的基础上后面7位为变位机各个轴的值",
+        "E001 = 0,0,1,2,3,0,0,1,2,3,4,5,6,7,0,0,0,0,0,0,0",
+        "//R变量中填入99999表示该轴不动",
+        "R001 = 1,1,0,0,0,0,0,1,99999,1,99999,99999,99999,0",
+        "S001 = 1,1,0,0,0,0,0,0,0,0,0,0,0,0",
+        "//局部数值变量",
+        "INTV I001 = 1",
+        "FLOATV D001 = 1.0000 ",
+        "BOOLV B001 = 1 ",
         "//INSTRUCTION",
-        "ROBOTTYPE = [${2:机器人类型}]",
+        "ROBOTTYPE = [${2:机器人类型,六轴机器人-R_GENERAL_6S,SCARA机器人-R_SCARA}]",
         "PROVERSION = [1.0.1]",
         "NOP",
         "${3://指令}",
@@ -19,10 +33,30 @@
       ],
       "description": "初始化文件"
     },
-    "Position": {
+    "P": {
       "prefix": "P",
-      "body": "P${1:序号} = ${2:坐标系},${3:0}",
+      "body": "P${1:001} = ${2:0},0,0,0,0,0,0,${3:0,0,0,0,0,0,0}",
       "description": "P点"
+    },
+    "E": {
+      "prefix": "E",
+      "body": "E${1:001} = ${2:0},0,0,0,0,0,0,${3:0,0,0,0,0,0,0,}${4:0,0,0,0,0,0,0}",
+      "description": "E点"
+    },
+    "INT": {
+      "prefix": "INT",
+      "body": "INTV I${1:001} = ${2:1}",
+      "description": "定义INT变量"
+    },
+    "DOUBLE": {
+      "prefix": "DOUBLE",
+      "body": "FLOATV D${1:001} = ${2:1}",
+      "description": "定义DOUBLE变量"
+    },
+    "BOOL": {
+      "prefix": "BOOL",
+      "body": "BOOLV B${1:001} = ${2:1}",
+      "description": "定义BOOL变量"
     },
     "MOVJ": {
       "prefix": "MOVJ",
@@ -47,7 +81,57 @@
     "MOVS": {
       "prefix": "MOVS",
       "body": "MOVJ ${1:P001} V = ${2:10} mm/s PL = ${3:0} ACC = 10 DEC = 10 0",
-      "description": "MOVS指令"
+      "description": "曲线插补，需要4条以上连续的MOVS才可执行"
+    },
+    "IMOV": {
+      "prefix": "IMOV",
+      "body": "IMOV ${1:S001} V = ${2:10} mm/s BF PL = 0 ACC = 1 DEC = 1 0",
+      "description": "增量插补，使用S变量，关节坐标时速度为VJ = 10 % ，其它时候为V = 10 mm/s RF-关节，BF-直角，TF-工具，UF-用户"
+    },
+    "SAMOV": {
+      "prefix": "SAMOV",
+      "body": "SAMOV ${1:R002} VJ = {2:10} % RF PL = 0 ACC = 10 DEC = 10 0",
+      "description": "走到绝对位置，使用R变量，关节坐标时速度为VJ = 10 % ，其它时候为V = 10 mm/s RF-关节，BF-直角，TF-工具，UF-用户"
+    },
+    "MOVJEXT": {
+      "prefix": "MOVJEXT",
+      "body": "MOVJEXT ${1:E001} VJ = {2:10} % PL = 0 ACC = 10 DEC = 10 0",
+      "description": "变位机协作走到目标点E，机器人关节插补"
+    },
+    "MOVLEXT": {
+      "prefix": "MOVLEXT",
+      "body": "MOVLEXT ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 0",
+      "description": "变位机协作走到目标点E，机器人直线插补"
+    },
+    "MOVCEXT": {
+      "prefix": "MOVCEXT",
+      "body": "MOVCEXT ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 0",
+      "description": "变位机协作走到目标点E，机器人圆弧插补"
+    },
+    "SPEED":{
+      "prefix": "SPEED",
+      "body": "SPEED = ${1:100} %",
+      "description": "改变后面指令的运动速度1-200%"
+    },
+    "DIN": {
+      "prefix": "DIN",
+      "body": "DIN GI001 IN#(1)",
+      "description": "将数字IO输入状态读入一个变量，IN#-读一个口，范围1-16。IGH#-读4个口，范围1-4。IG#-读8个口，范围1-2。"
+    },
+    "DOUT": {
+      "prefix": "DOUT",
+      "body": "DOUT OT#(1) 1 T = 0",
+      "description": "输出数字IO，DOUT 输出组，OT#-输出一个端口，OGH#-输出4个端口，OG#-输出8个端口 输出值，需将2进制转为10进制 T = 输出时间，填0表示无限时"
+    },
+    "AIN": {
+      "prefix": "AIN",
+      "body": "AIN D001 AIN1",
+      "description": "将模拟IO的输入值读入到变量"
+    },
+    "AOUT": {
+      "prefix": "AOUT",
+      "body": "AOUT AOUT1 0",
+      "description": "输出模拟IO值，一次输出一个端口"
     },
     "IF": {
       "prefix": "IF",
@@ -63,6 +147,7 @@
       "prefix": "JUMP",
       "body": [
         "LABEL *${1:label1}",
+        "",
         "JUMP *${1:label1} WHEN (${2:GI001 == 0})"
       ],
       "description": "JUMP指令，跳转到指定行，搭配LABEL使用。若不需要判断条件，可以将WHEN以及后面的条件删掉"
@@ -71,9 +156,214 @@
       "prefix":"UNTIL",
       "body":[
         "UNTIL (${1:I001 == 0})",
+        "${2}",
         "ENDUNTIL"
       ],
       "description":"UNTIL指令，当条件满足则调到ENDUNTIL下面一行执行"
+    },
+    "CLKSTART":{
+      "prefix":"CLKSTART",
+      "body":[
+        "CLKSTART ID = ${1:1} ${2:GD001}",
+        "${3}",
+        "CLKSTOP ID = ${1:1}"
+      ],
+      "description":"计时开始，将计时的结果放到后面的变量中"
+    },
+    "SETINT":{
+      "prefix":"SETINT",
+      "body":"SETINT ${1:I001} = ${2:0}",
+      "description":"设置局部与全局INT变量的值"
+    },
+    "SETDOUBLE":{
+      "prefix":"SETDOUBLE",
+      "body":"SETDOUBLE ${1:D001} = ${2:0}",
+      "description":"设置局部与全局DOUBLE变量的值"
+    },
+    "SETBOOL":{
+      "prefix":"SETBOOL",
+      "body":"SETBOOL ${1:B001} = ${2:0}",
+      "description":"设置局部与全局BOOL变量的值"
+    },
+    "READ_DOUT":{
+      "prefix":"READ_DOUT",
+      "body":"READ_DOUT I001 OG#(1)",
+      "description":"将数字IO输出状态存入变量"
+    },
+    "ADD":{
+      "prefix":"ADD",
+      "body":"ADD ${1:I001} {2:0}",
+      "description":"变量加上一个数值结果存入原变量，数值可以为变量也可以为常量"
+    },
+    "SUB":{
+      "prefix":"SUB",
+      "body":"SUB ${1:I001} {2:0}",
+      "description":"变量减去一个数值结果存入原变量，数值可以为变量也可以为常量"
+    },
+    "MUL":{
+      "prefix":"MUL",
+      "body":"MUL ${1:I001} {2:0}",
+      "description":"变量乘以一个数值结果存入原变量，数值可以为变量也可以为常量"
+    },
+    "DIV":{
+      "prefix":"DIV",
+      "body":"DIV ${1:I001} {2:0}",
+      "description":"变量除以一个数值结果存入原变量，数值可以为变量也可以为常量"
+    },
+    "MOD":{
+      "prefix":"MOD",
+      "body":"MOD ${1:I001} {2:0}",
+      "description":"变量对一个数值取余，结果存入原变量，数值可以为变量也可以为常量"
+    },
+    "SIN":{
+      "prefix":"SIN",
+      "body":"SIN ${1:I001} {2:0}",
+      "description":"将一个数值的正弦值存入变量，数值可以为变量也可以为常量"
+    },
+    "COS":{
+      "prefix":"COS",
+      "body":"COS ${1:I001} {2:0}",
+      "description":"将一个数值的余弦值存入变量，数值可以为变量也可以为常量"
+    },
+    "ATAN":{
+      "prefix":"ATAN",
+      "body":"ATAN ${1:I001} {2:0}",
+      "description":"将一个数值的反切值存入变量，数值可以为变量也可以为常量"
+    },
+    "LOGICAL_OP":{
+      "prefix":"LOGICAL_OP",
+      "body":"LOGICAL_OP ${1:B001} = ${2:I001} AND ${3:I002}",
+      "description":"将一个变量与一个数值的逻辑运算结果存入一个BOOL或INT类型变量，数值可以为变量也可以为常量。逻辑计算类型包括:与-AND，或-OR，非-NOT"
+    },
+    "SWITCHTOOL":{
+      "prefix":"SWITCHTOOL",
+      "body":"SWITCHTOOL (${1:0})",
+      "description":"切换工具手到对应的序号"
+    },
+    "SWITCHUSER":{
+      "prefix":"SWITCHUSER",
+      "body":"SWITCHUSER (${1:0})",
+      "description":"切换工具手到对应的序号"
+    },
+    "SWITCHSYNC":{
+      "prefix":"SWITCHSYNC",
+      "body":"SWITCHSYNC ${1:0}",
+      "description":"切换外部轴到对应的组号"
+    },
+    "SENDMSG":{
+      "prefix":"SENDMSG",
+      "body":"SENDMSG ID = 1 #${1:Message}#",
+      "description":"切换外部轴到对应的组号"
+    },
+    "OPENMSG":{
+      "prefix":"OPENMSG",
+      "body":"OPENMSG ID = ${1:1}",
+      "description":"切换外部轴到对应的组号"
+    },
+    "CLOSEMSG":{
+      "prefix":"CLOSEMSG",
+      "body":"CLOSEMSG ID = 1",
+      "description":"切换外部轴到对应的组号"
+    },
+    "MSG_CONN_ST":{
+      "prefix":"MSG_CONN_ST",
+      "body":"MSG_CONN_ST ${1:1} ${2:B001}",
+      "description":"检测EtherNet连接状态，并将状态存入变量"
+    },
+    "PARSEMSG":{
+      "prefix":"PARSEMSG",
+      "body":"PARSEMSG ID = ${1:1} ${2:GI001} CLEARCACHE = ${3:0}",
+      "description":"解析传来的数据并存入变量"
+    },
+    "READCOMM":{
+      "prefix":"READCOMM",
+      "body":"READCOMM ID = ${1:1} ${2:EHTERNET} TO ${3:G001} ${4:I001}",
+      "description":"读取传来的数据并存入变量"
+    },
+    "USERFRAME_SET":{
+      "prefix":"USERFRAME_SET",
+      "body":"USERFRAME_SET ID = ${1:1} ${2:UX} ${3:GI001}",
+      "description":"设置用户坐标系的数值，数值可以为变量也可以为常量"
+    },
+    "TOOLFRAME_SET":{
+      "prefix":"TOOLFRAME_SET",
+      "body":"TOOLFRAME_SET ID = ${1:1} ${2:TX} ${3:GI001}",
+      "description":"读取传来的数据并存入变量"
+    },
+    "READPOS":{
+      "prefix":"READPOS",
+      "body":"READPOS ${1:D001} ${2:CURPOS} ${3:RF} ${4:1}",
+      "description":"读取当前位置或位置变量某一轴的值存入DOUBLE变量。当前位置-CURPOS，位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户"
+    },
+    "POSADD":{
+      "prefix":"POSADD",
+      "body":"POSADD ${1:P001} ${2:RF} ${3:1} ${4:GI003}",
+      "description":"给位置变量的某一轴加上一个值并存入位置变量。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "POSSUB":{
+      "prefix":"POSSUB",
+      "body":"POSSUB ${1:P001} ${2:RF} ${3:1} ${4:GI003}",
+      "description":"给位置变量的某一轴减去一个值并存入位置变量。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "POSSET":{
+      "prefix":"POSSET",
+      "body":"POSSET ${1:P001} ${2:RF} ${3:1} ${4:GI003}",
+      "description":"给位置变量的某一轴设置数值。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "COPYPOS":{
+      "prefix":"COPYPOS",
+      "body":"COPYPOS ${1：CURPOS} TO ${2:P001}",
+      "description":"将一个位置变量复制到另外一个位置变量。位置变量-P001、G001、P$GI001、G$I001。"
+    },
+    "POSADDALL":{
+      "prefix":"POSADDALL",
+      "body":"POSADDALL P001 RF 0 0 0 0 0 0 0",
+      "description":"将位置变量所有轴均加上数值。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "POSSUBALL":{
+      "prefix":"POSSUBALL",
+      "body":"POSSUBALL P001 RF 0 0 0 0 0 0 0",
+      "description":"将位置变量所有轴均减去数值。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "POSSETALL":{
+      "prefix":"POSSETALL",
+      "body":"POSSETALL P001 RF 0 0 0 0 0 0 0",
+      "description":"将位置变量所有轴均设置数值。位置变量-P001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "TOFFSETON":{
+      "prefix":"TOFFSETON",
+      "body":["TOFFSETON RF 0 0 0 0 0 0 0","","TOFFSETOFF"],
+      "description":"在TOFFSETON与TOFFSETOFF之间的指令均偏移相应数值。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
+    },
+    "PTHREAD_START":{
+      "prefix":"PTHREAD_START",
+      "body":"PTHREAD_START [$${1:Program1}$] ${2:LOCAL}",
+      "description":"开启一个后台任务。LOCAL-局部后台任务，GLOBAL-全局后台任务"
+    },
+    "PTHREAD_END":{
+      "prefix":"PTHREAD_END",
+      "body":"PTHREAD_END [$${1:QQ}$] ${2:LOCAL}",
+      "description":"关闭一个后台任务。LOCAL-局部后台任务，GLOBAL-全局后台任务"
+    },
+    "PAUSERUN":{
+      "prefix":"PAUSERUN",
+      "body":"PAUSERUN ALL",
+      "description":"暂停运行，ALL-所有程序，MAIN-主程序，[$ProgramName$]-局部后台任务"
+    },
+    "CONTINUERUN":{
+      "prefix":"CONTINUERUN",
+      "body":"CONTINUERUN MAIN",
+      "description":"继续运行，MAIN-主程序，[$ProgramName$]-局部后台任务"
+    },
+    "STOPRUN":{
+      "prefix":"STOPRUN",
+      "body":"STOPRUN",
+      "description":"停止运行程序"
+    },
+    "RESTARTRUN":{
+      "prefix":"RESTARTRUN",
+      "body":"RESTARTRUN",
+      "description":"重新运行"
     }
   }
 }
