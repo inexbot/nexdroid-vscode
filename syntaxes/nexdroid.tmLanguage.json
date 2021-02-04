@@ -56,11 +56,11 @@
       "patterns": [
         {
           "name": "keyword.control.nexdroid",
-          "match": "\\b(IF|ELSEIF|ELSE|WHILE|ENDIF|ENDWHILE|JUMP|LABEL|UNTIL|ENDUNTIL|CLKSTART|CLKSTOP|CLKRESET)\\b"
+          "match": "\\b(IF|ELSEIF|ELSE|WHILE|WAIT|ENDIF|ENDWHILE|JUMP|LABEL|UNTIL|ENDUNTIL|CLKSTART|CLKSTOP|CLKRESET|CRAFTLINE|CMDNOTE|POSREACHABLE)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
-          "match": "\\b(TIMER|WAIT|CALL|SPEED)\\b"
+          "match": "\\b(TIMER|CALL|SPEED)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
@@ -76,7 +76,7 @@
         }
       ]
     },
-    "calc":{
+    "calc": {
       "patterns": [
         {
           "name": "support.other.nexdroid",
