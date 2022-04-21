@@ -3,7 +3,7 @@
   "displayName": "nexdroid",
   "description": "纳博特科技机器人程序编辑",
   "publisher": "inexbot",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
@@ -27,6 +27,10 @@
     "languages": [
       {
         "id": "JBR",
+        "icon": {
+          "light": "./icon/robot.svg",
+          "dark": "./icon/robot.svg"
+        },
         "aliases": [
           "NexDroid"
         ],
@@ -64,13 +68,7 @@
           "group": "navigation"
         }
       ]
-    },
-    "iconThemes": [
-      {"id":"nexdroid",
-      "label": "NexDroid",
-      "path": "./icon/icon.json"
-      }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
