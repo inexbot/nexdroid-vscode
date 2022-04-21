@@ -64,7 +64,13 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "iconThemes": [
+      {"id":"nexdroid",
+      "label": "NexDroid",
+      "path": "./icon/icon.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
@@ -81,7 +87,6 @@
     "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
     "@types/request": "^2.48.8",
-    "@types/unzip": "^0.1.1",
     "@types/vscode": "^1.66.0",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
@@ -94,7 +99,6 @@
   "dependencies": {
     "adm-zip": "^0.5.9",
     "fs-extra": "^10.1.0",
-    "request": "^2.88.2",
-    "unzip": "^0.1.11"
+    "request": "^2.88.2"
   }
 }

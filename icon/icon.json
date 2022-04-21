@@ -1,0 +1,10 @@
+{
+    "iconDefinitions":{
+        "_jbr":{
+            "iconPath":"./robot.svg"
+        }
+    },
+    "languageIds":{
+        "JBR":"_jbr"
+    }
+}

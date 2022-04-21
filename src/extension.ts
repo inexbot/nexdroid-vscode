@@ -11,6 +11,10 @@ let editor: vscode.TextEditor | undefined = undefined;
 export function activate(context: vscode.ExtensionContext) {
   vscode.window.showInformationMessage("NexDroid扩展打开成功！");
   let disposable = vscode.commands.registerCommand("nexdroid.parse", () => {
+    if (vscode.env.appHost != "desktop") {
+      vscode.window.showErrorMessage("解析文件功能目前仅支持pc平台！");
+      return;
+    }
     outputChannel.hide();
     editor = vscode.window.activeTextEditor;
     outputChannel.appendLine(`开始解析文件...`);
