@@ -1,2 +1,5 @@
-nexdroid-*.vsix
-nexdroid-*.zip
+out
+dist
+node_modules
+.vscode-test/
+*.vsix

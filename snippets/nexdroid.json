@@ -1,11 +1,42 @@
 {
   ".source.JBR": {
+    "VJ": {
+      "prefix": "VJ",
+      "body": "VJ = ${1:20} %",
+      "description": "MOVJ速度"
+    },
+    "V": {
+      "prefix": "V",
+      "body": "V = ${1:100} mm/s",
+      "description": "MOVL、MOVC、MOVCA、MOVS速度"
+    },
+    "PL": {
+      "prefix": "PL",
+      "body": "PL = ${1:5}",
+      "description": "平滑过渡等级，0-5"
+    },
+    "ACC": {
+      "prefix": "ACC",
+      "body": "ACC = ${1:50}",
+      "description": "加速度等级，1-100"
+    },
+    "DEC": {
+      "prefix": "DEC",
+      "body": "DEC = ${1:50}",
+      "description": "减速度等级，1-100"
+    },
+    "SPIN": {
+      "prefix": "SPIN",
+      "body": "SPIN = ${1:0}",
+      "description": "圆类型,0-姿态不变,1-六轴不转,2-六轴旋转"
+    },
     "Create": {
       "prefix": "begin",
       "body": [
-        "//DIR",
+        "//DIR $WORKSPACE_FOLDER",
         "//JOB",
-        "//NAME YT",
+        "//NAME $TM_FILEPATH",
+        "//$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE  $CURRENT_HOUR-$CURRENT_MINUTE-$CURRENT_SECOND",
         "//POS",
         "///POSTYPE PULSE",
         "///PULSE",
@@ -25,7 +56,7 @@
         "FLOATV D001 = 1.0000 ",
         "BOOLV B001 = 1 ",
         "//INSTRUCTION",
-        "ROBOTTYPE = [${2:机器人类型,六轴机器人-R_GENERAL_6S,SCARA机器人-R_SCARA}]",
+        "ROBOTTYPE = [${2|R_GENERAL_6S,R_SCARA|}]",
         "PROVERSION = [1.0.1]",
         "NOP",
         "${3://指令}",
@@ -108,20 +139,55 @@
       "body": "MOVCEXT ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 0",
       "description": "变位机协作走到目标点E，机器人圆弧插补"
     },
-    "MOVCADOUBLE": {
-      "prefix": "MOVCADOUBLE",
-      "body": "MOVCADOUBLE ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 SPIN = 0 0",
-      "description": "变位机协作走到目标点E，机器人圆弧插补"
-    },
     "SPEED": {
       "prefix": "SPEED",
       "body": "SPEED = ${1:100} %",
       "description": "改变后面指令的运动速度1-200%"
     },
+    "MOVJDOUBLE": {
+      "prefix": "MOVJDOUBLE",
+      "body": "MOVJDOUBLE ${1:E001} VJ ={2:10} % PL = 0 ACC = 10 DEC = 10 0",
+      "description": "双机协作走到目标E点，机器人关节插补"
+    },
+    "MOVLDOUBLE": {
+      "prefix": "MOVLDOUBLE",
+      "body": "MOVLDOUBLE ${1:E001} V ={2:10} mm/s PL = 0 ACC = 10 DEC = 10 0",
+      "description": "双机协作走到目标E点，机器人直线插补"
+    },
+    "MOVCDOUBLE": {
+      "prefix": "MOVCDOUBLE",
+      "body": "MOVCDOUBLE ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 0",
+      "description": "双机协作走到目标E点，机器人圆弧插补"
+    },
+    "MOVCADOUBLE": {
+      "prefix": "MOVCADOUBLE",
+      "body": "MOVCADOUBLE ${1:E001} V = {2:10} mm/s PL = 0 ACC = 10 DEC = 10 SPIN = 0 0",
+      "description": "变位机协作走到目标点E，机器人圆弧插补"
+    },
+    "MOVCOMM": {
+      "prefix": "MOVCOMM",
+      "body": "MOVCOMM ${1:MovJ} {2:P001} V = {3:10} % PL = 0 ACC = 20 DEC = 20 0",
+      "description": "通过外部网络协议发点进行运动"
+    },
+    "EXTMOV": {
+      "prefix": "EXTMOV",
+      "body": "EXTMOV 1 FOLLOW 1",
+      "description": "外部轴外部轴按机器人线速度倍数的速度或恒速跟随机器人随动"
+    },
+    "GEARIN": {
+      "prefix": "GEARIN",
+      "body": "GEARIN ${1:J1} {2:O1} {3:1}",
+      "description": "让外部轴某轴随机器人某轴一起运动"
+    },
+    "MRESET": {
+      "prefix": "MRESET",
+      "body": "MRESET 0",
+      "description": "让外部轴某轴或者全部轴圈数复位"
+    },
     "DIN": {
       "prefix": "DIN",
       "body": "DIN GI001 IN#(1)",
-      "description": "将数字IO输入状态读入一个变量，IN#-读一个口，范围1-16。IGH#-读4个口，范围1-4。IG#-读8个口，范围1-2。"
+      "description": "将数字IO输入状态读入一个变量，IN#-读一个口，范围1-16。IGH#-读4个口，范围1-4。IG#-读8个口，范围1-2"
     },
     "DOUT": {
       "prefix": "DOUT",
@@ -137,6 +203,26 @@
       "prefix": "AOUT",
       "body": "AOUT AOUT1 0",
       "description": "输出模拟IO值，一次输出一个端口"
+    },
+    "PULSEOUT": {
+      "prefix": "PULSEOUT",
+      "body": "PULSEOUT RATE = 100 SUM = 100",
+      "description": "按照设定的脉冲频率与个数，在 R1 PWM IO 板上的 DB9 端子的引脚 4（PWM+）上进行输出 "
+    },
+    "READ_DOUT": {
+      "prefix": "READ_DOUT",
+      "body": "READ_DOUT I001 OT#(1)",
+      "description": "读数数字输出端口的输出状态，并存入目标变量中"
+    },
+    "TIME": {
+      "prefix": "TIME",
+      "body": "TIMER T = 1",
+      "description": "延时设置的值，也可以通过变量设置，然后继续运行"
+    },
+    "CALL": {
+      "prefix": "CALL",
+      "body": "CALL [\\$DDD\\$]",
+      "description": "调用另一个程序，被调用程序运行完后则返回原程序 CALL 指令的下一行继续运行"
     },
     "IF": {
       "prefix": "IF",
@@ -177,6 +263,22 @@
       "body": ["UNTIL (${1:I001 == 0})", "${2}", "ENDUNTIL"],
       "description": "当条件满足则调到ENDUNTIL下面一行执行"
     },
+    "CRAFTLINE": {
+      "prefix": "CRAFTLINE",
+      "body": ["CRAFTLINE (${1:1})"],
+      "description": "专用工艺指令，程序中运行该指令后，在专用工艺界面会跳转到对应的行数"
+    },
+    "CMDNOTE": {
+      "prefix": "CMDNOTE",
+      "body": ["(##${1:注释内容}\\$\\$)"],
+      "description": "指令注释，可以使用该指令在程序适当位置添加注释，便于调试"
+    },
+    "POS_REACHABLE": {
+      "prefix": "POS_REACHABLE",
+      "body": ["POS_REACHABLE $(1:MOVJ) $(2:P001) $(3:B001)"],
+      "description": "到达判断指令，用于判断目标点是否能到达，点位能够到达变量置 1，不能到达置 0"
+    },
+
     "READLINEAR": {
       "prefix": "READLINEAR",
       "body": ["READLINEAR (${1:GI001})", "${2}", "ENDREADLINEAR"],
@@ -211,10 +313,10 @@
       "body": "SETBOOL ${1:B001} = ${2:0}",
       "description": "设置局部与全局BOOL变量的值"
     },
-    "READ_DOUT": {
-      "prefix": "READ_DOUT",
-      "body": "READ_DOUT I001 OG#(1)",
-      "description": "将数字IO输出状态存入变量"
+    "FORCESET": {
+      "prefix": "FORCESET",
+      "body": "FORCESET $(1:GI001)",
+      "description": "在程序运行过程中，所有的计算、赋值操作均是对缓存中的数值进行更改的，并不会存入系统文件中， 即当程序运行停止后所有全局变量的值都会还原,若要强制将内容中的全局数值变量写入文件中， 则可以使用 FORCESET 指令 "
     },
     "ADD": {
       "prefix": "ADD",
@@ -276,6 +378,11 @@
       "body": "SWITCHSYNC ${1:0}",
       "description": "切换外部轴到对应的组号"
     },
+    "USERCOORD_TRANS": {
+      "prefix": "USERCOORD_TRANS",
+      "body": "USERCOORD_TRANS (${1:1} ${2:1} {3:1})",
+      "description": "将 B、C 用户坐标系叠加（×），结果置入 A 用户坐标系"
+    },
     "SENDMSG": {
       "prefix": "SENDMSG",
       "body": "SENDMSG ID = 1 #${1:Message}#",
@@ -290,6 +397,16 @@
       "prefix": "CLOSEMSG",
       "body": "CLOSEMSG ID = 1",
       "description": "切换外部轴到对应的组号"
+    },
+    "PRINTMSG": {
+      "prefix": "PRINTMSG",
+      "body": "PRINTMSG ${1:#输出信息#}",
+      "description": "通过提示条的方式打印字符串"
+    },
+    "MSG_CONNECTION_STATUS": {
+      "prefix": "MSG_CONNECTION_STATUS",
+      "body": "MSG_CONN_ST ${1:1} ${1:B001}",
+      "description": "获取网络设置里某个工艺号的连接状态"
     },
     "MSG_CONN_ST": {
       "prefix": "MSG_CONN_ST",
@@ -338,7 +455,7 @@
     },
     "COPYPOS": {
       "prefix": "COPYPOS",
-      "body": "COPYPOS ${1：CURPOS} TO ${2:P001}",
+      "body": "COPYPOS ${1:CURPOS} TO ${2:P001}",
       "description": "将一个位置变量复制到另外一个位置变量。位置变量-P001、G001、P$GI001、G$I001。"
     },
     "POSADDALL": {
@@ -361,25 +478,40 @@
       "body": ["TOFFSETON RF 0 0 0 0 0 0 0", "", "TOFFSETOFF"],
       "description": "在TOFFSETON与TOFFSETOFF之间的指令均偏移相应数值。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
     },
+    "READPOSMSG": {
+      "prefix": "READPOSMSG",
+      "body": "READPOSMSG ${1:P001} ${2:TCS} ${3:I001}",
+      "description": "将点位信息读取到变量中"
+    },
+    "POS_STRETCH": {
+      "prefix": "POS_STRETCH",
+      "body": "POS_STRETCH ${1:LINE} ${2:P001} ${3:P001} ${4:0} ${5:0} ${6:P001} ${7:P001}",
+      "description": "将轨迹按照轨迹方向偏移"
+    },
+    "SETPOSMSG": {
+      "prefix": "SETPOSMSG",
+      "body": "SETPOSMSG ${1:P001} ${2:0} ${3:0} ${4:0} ${5:0} ${6:0}",
+      "description": "修改点位信息:坐标系，角度/弧度，形态，工具号，用户坐标号"
+    },
     "PTHREAD_START": {
       "prefix": "PTHREAD_START",
-      "body": "PTHREAD_START [$${1:Program1}$] ${2:LOCAL}",
+      "body": "PTHREAD_START [\\$${1:Program1}\\$] ${2|LOCAL,GLOBAL|}",
       "description": "开启一个后台任务。LOCAL-局部后台任务，GLOBAL-全局后台任务"
     },
     "PTHREAD_END": {
       "prefix": "PTHREAD_END",
-      "body": "PTHREAD_END [$${1:QQ}$] ${2:LOCAL}",
+      "body": "PTHREAD_END [\\$${1:QQ}\\$] ${2:LOCAL}",
       "description": "关闭一个后台任务。LOCAL-局部后台任务，GLOBAL-全局后台任务"
     },
     "PAUSERUN": {
       "prefix": "PAUSERUN",
       "body": "PAUSERUN ALL",
-      "description": "暂停运行，ALL-所有程序，MAIN-主程序，[$ProgramName$]-局部后台任务"
+      "description": "暂停运行，ALL-所有程序，MAIN-主程序，\\[\\$ProgramName\\$\\]-局部后台任务"
     },
     "CONTINUERUN": {
       "prefix": "CONTINUERUN",
       "body": "CONTINUERUN MAIN",
-      "description": "继续运行，MAIN-主程序，[$ProgramName$]-局部后台任务"
+      "description": "继续运行，MAIN-主程序，\\[\\$ProgramName\\$\\]-局部后台任务"
     },
     "STOPRUN": {
       "prefix": "STOPRUN",
@@ -390,6 +522,11 @@
       "prefix": "RESTARTRUN",
       "body": "RESTARTRUN",
       "description": "重新运行"
+    },
+    "WINDOW": {
+      "prefix": "WINDOW",
+      "body": "WINDOW [[\\$${1:1}\\$]] I001 1 [[\\$${2:1}\\$]] 0",
+      "description": "根据变量选项内容弹出自定义窗口"
     }
   }
 }

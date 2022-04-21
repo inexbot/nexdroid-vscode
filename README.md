@@ -1,28 +1,70 @@
+# nexdroid-code README
 
-# NexDroid
+This is the README for your extension "nexdroid-code". After writing up a brief description, we recommend including the following sections.
 
-## 简介
+## Features
 
-这个插件是用来辅助在VSCode中手动编写纳博特控制系统的程序的。
+Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-## 使用
+For example if there is an image subfolder under your extension project workspace:
 
-当前本插件有两个功能，代码自动补全、说明与代码高亮。
+\!\[feature X\]\(images/feature-x.png\)
 
-本插件涉及到的指令请参照我们的[指令说明书](https://www.inexbot.com/manual/)
+> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
-**在编写程序时请确保已经充分了解本系统，以及所写指令功能。**
+## Requirements
 
-使用介绍:
+If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-初始化文件输入begin自动补全
+## Extension Settings
 
-![begin](https://forinexbotweb.oss-cn-shanghai.aliyuncs.com/extension/gif/begin.gif)
+Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
 
-定义局部变量
+For example:
 
-![var](https://forinexbotweb.oss-cn-shanghai.aliyuncs.com/extension/gif/var.gif)
+This extension contributes the following settings:
 
-快速插入指令
+* `myExtension.enable`: enable/disable this extension
+* `myExtension.thing`: set to `blah` to do something
 
-![instruct](https://forinexbotweb.oss-cn-shanghai.aliyuncs.com/extension/gif/instruct.gif)
+## Known Issues
+
+Calling out known issues can help limit users opening duplicate issues against your extension.
+
+## Release Notes
+
+Users appreciate release notes as you update your extension.
+
+### 1.0.0
+
+Initial release of ...
+
+### 1.0.1
+
+Fixed issue #.
+
+### 1.1.0
+
+Added features X, Y, and Z.
+
+-----------------------------------------------------------------------------------------------------------
+## Following extension guidelines
+
+Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+
+* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+
+## Working with Markdown
+
+**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+
+* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
+* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
+* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+
+### For more information
+
+* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
+* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+
+**Enjoy!**

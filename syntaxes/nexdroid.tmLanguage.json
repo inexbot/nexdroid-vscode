@@ -88,7 +88,7 @@
       "patterns": [
         {
           "name": "markup.italic.nexdroid",
-          "match": "\\b(VJ|V|PL|ACC|DEC)\\b"
+          "match": "\\b(VJ|V|PL|ACC|DEC|SPIN)\\b"
         },
         {
           "name": "variable.parameter.nexdroid",
@@ -100,15 +100,15 @@
       "patterns": [
         {
           "name": "constant.numeric.nexdroid",
-          "match": "^[PSRE][0-9][0-9][1-9]"
+          "match": "^[PSRE][0-9]{3}"
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[GPESR][0-9][0-9][1-9]"
+          "match": "[GPESR][0-9]{3}"
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[G]?[IBD][0-9][0-9][1-9]"
+          "match": "[G]?[IBD][0-9]{3}"
         }
       ]
     },
