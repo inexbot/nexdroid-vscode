@@ -3,7 +3,7 @@
   "displayName": "nexdroid",
   "description": "纳博特科技机器人程序编辑",
   "publisher": "inexbot",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
@@ -20,7 +20,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onCommand:nexdroid.parse"
+    "onCommand:nexdroid.parse",
+    "onLanguage:JBR"
   ],
   "main": "./out/extension.js",
   "contributes": {
