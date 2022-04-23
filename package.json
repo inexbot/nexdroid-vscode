@@ -20,8 +20,7 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onCommand:nexdroid.parse",
-    "onLanguage:JBR"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -57,11 +56,15 @@
     ],
     "commands": [
       {
+        "command": "nexdroid.newFile",
+        "title": "生成文件"
+      },
+      {
         "command": "nexdroid.parse",
         "title": "解析文件"
       },
       {
-        "command":"nexdroid.insertIns",
+        "command": "nexdroid.insertIns",
         "title": "插入指令"
       }
     ],
@@ -84,14 +87,25 @@
       ]
     },
     "views": {
-      "nexdroid-sidebar":[
-        {"id": "nexdroid-instructs","name": "指令插入","when": "resourceLangId == JBR "},
-        {"id": "nexdroid-commands","name": "功能","when":"resourceLangId == JBR "}
+      "nexdroid-sidebar": [
+        {
+          "id": "nexdroid-instructs",
+          "name": "指令插入"
+        },
+        {
+          "id": "nexdroid-commands",
+          "name": "功能"
+        }
       ]
     },
     "viewsWelcome": [
-      {"view":"nexdroid-commands",
-      "contents": "[解析文件](command:nexdroid.parse)"
+      {
+        "view": "nexdroid-commands",
+        "contents": "[新建作业程序](command:nexdroid.newFile)"
+      },
+      {
+        "view": "nexdroid-instructs",
+        "contents": "没有检测到NexDroid系统的作业程序，请新建或打开一个"
       }
     ]
   },
