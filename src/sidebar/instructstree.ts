@@ -5,9 +5,6 @@ export function createInstructTree(context: vscode.ExtensionContext) {
   let provider = vscode.window.createTreeView("nexdroid-instructs", {
     treeDataProvider: treeDataProvider,
   });
-  provider.onDidChangeSelection((e) => {
-    // console.log(e);
-  });
   context.subscriptions.push(provider);
 }
 

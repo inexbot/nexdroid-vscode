@@ -17,6 +17,10 @@ export function registerParse(context: vscode.ExtensionContext){
         }
         outputChannel.hide();
         editor = vscode.window.activeTextEditor;
+        if(editor?.document.languageId != "JBR"){
+          vscode.window.showErrorMessage("解析文件功能仅支持NexDroid平台的JBR、JBP文件！");
+          return;
+        }
         outputChannel.appendLine(`开始解析文件...`);
         outputChannel.show();
         workPath = context.globalStorageUri.fsPath;

@@ -3,7 +3,7 @@
   "displayName": "nexdroid",
   "description": "纳博特科技机器人程序编辑",
   "publisher": "inexbot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
@@ -72,9 +72,6 @@
           "command": "nexdroid.parse",
           "group": "navigation"
         }
-      ],
-      "view/item/context": [
-        {"command": "nexdroid.parse","when": "view == nexdroid-commands","group": "inline"}
       ]
     },
     "viewsContainers": {
@@ -88,8 +85,8 @@
     },
     "views": {
       "nexdroid-sidebar":[
-        {"id": "nexdroid-instructs","name": "指令插入"},
-        {"id": "nexdroid-commands","name": "功能"}
+        {"id": "nexdroid-instructs","name": "指令插入","when": "resourceLangId == JBR "},
+        {"id": "nexdroid-commands","name": "功能","when":"resourceLangId == JBR "}
       ]
     },
     "viewsWelcome": [
