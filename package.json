@@ -3,7 +3,7 @@
   "displayName": "nexdroid",
   "description": "纳博特科技机器人程序编辑",
   "publisher": "inexbot",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
