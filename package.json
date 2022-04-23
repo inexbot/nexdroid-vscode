@@ -59,6 +59,10 @@
       {
         "command": "nexdroid.parse",
         "title": "解析文件"
+      },
+      {
+        "command":"nexdroid.insertIns",
+        "title": "插入指令"
       }
     ],
     "menus": {
@@ -68,8 +72,31 @@
           "command": "nexdroid.parse",
           "group": "navigation"
         }
+      ],
+      "view/item/context": [
+        {"command": "nexdroid.parse","when": "view == nexdroid-commands","group": "inline"}
       ]
-    }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nexdroid-sidebar",
+          "title": "NexDroid开始！",
+          "icon": "./icon/sidebar.png"
+        }
+      ]
+    },
+    "views": {
+      "nexdroid-sidebar":[
+        {"id": "nexdroid-instructs","name": "指令插入"},
+        {"id": "nexdroid-commands","name": "功能"}
+      ]
+    },
+    "viewsWelcome": [
+      {"view":"nexdroid-commands",
+      "contents": "[解析文件](command:nexdroid.parse)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

@@ -371,7 +371,7 @@
     "SWITCHUSER": {
       "prefix": "SWITCHUSER",
       "body": "SWITCHUSER (${1:0})",
-      "description": "切换工具手到对应的序号"
+      "description": "切换用户坐标到对应的序号"
     },
     "SWITCHSYNC": {
       "prefix": "SWITCHSYNC",
@@ -386,17 +386,17 @@
     "SENDMSG": {
       "prefix": "SENDMSG",
       "body": "SENDMSG ID = 1 #${1:Message}#",
-      "description": "切换外部轴到对应的组号"
+      "description": "通过ID号对应的网络通讯发送数据"
     },
     "OPENMSG": {
       "prefix": "OPENMSG",
       "body": "OPENMSG ID = ${1:1}",
-      "description": "切换外部轴到对应的组号"
+      "description": "打开对应ID号的网络通讯"
     },
     "CLOSEMSG": {
       "prefix": "CLOSEMSG",
       "body": "CLOSEMSG ID = 1",
-      "description": "切换外部轴到对应的组号"
+      "description": "关闭对应ID号的网络通讯"
     },
     "PRINTMSG": {
       "prefix": "PRINTMSG",
@@ -431,7 +431,7 @@
     "TOOLFRAME_SET": {
       "prefix": "TOOLFRAME_SET",
       "body": "TOOLFRAME_SET ID = ${1:1} ${2:TX} ${3:GI001}",
-      "description": "读取传来的数据并存入变量"
+      "description": "设置工具坐标系的数值，数值可以为变量也可以为常量"
     },
     "READPOS": {
       "prefix": "READPOS",
