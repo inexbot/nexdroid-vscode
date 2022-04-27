@@ -48,7 +48,7 @@
       "patterns": [
         {
           "name": "support.function.nexdroid",
-          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|SAMOV|MOVJEXT|MOVLEXT|MOVCEXT)\\b"
+          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|SAMOV|MOVJEXT|MOVLEXT|MOVCEXT|EXTMOV|GEARIN|MRESET|POS_REACHABLE|READPOS|READPOSMSG|READLINEAR|POSADD|POSSUB|POSSET|COPYPOS|POSADDALL|POSSUBALL|POSSETALL|TOFFSETON|TOFFSETOFF|POS_STRETCH|SETPOSMSG|SWITCHTOOL|SWITCHUSER|TOOLFRAME_SET|USERFRAME_SET)\\b"
         }
       ]
     },
@@ -64,11 +64,11 @@
         },
         {
           "name": "keyword.other.nexdroid",
-          "match": "\\b(DIN|DOUT|AIN|AOUT|READ_DOUT|SWITCHTOOL|SWITCHUSER|SWITCHSYNC)\\b"
+          "match": "\\b(DIN|DOUT|AIN|AOUT|READ_DOUT|SWITCHSYNC)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
-          "match": "\\b(SENDMSG|PARSEMSG|READCOMM|OPENMSG|CLOSEMSG|PRINTMSG|MSG_CONN_ST)\\b"
+          "match": "\\b(SENDMSG|PARSEMSG|READCOMM|OPENMSG|CLOSEMSG|PRINTMSG|MSG_CONN_ST|WINDOW)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
@@ -80,7 +80,7 @@
       "patterns": [
         {
           "name": "support.other.nexdroid",
-          "match": "\\b(ADD|SUB|MUL|DIV|MOD|SIN|COS|ATAN|LOGICAL_OP|SETINT|SETDOUBLE|SETBOOL|FORCESET|USERFRAME_SET|TOOLFRAME_SET|READPOS|POSADD|POSSUB|POSSET|COPYPOS|POSADDALL|POSSUBALL|POSSETALL|TOFFSETON|TOFFSETOFF)\\b"
+          "match": "\\b(ADD|SUB|MUL|DIV|MOD|SIN|COS|ATAN|LOGICAL_OP|SETINT|SETDOUBLE|SETBOOL|FORCESET)\\b"
         }
       ]
     },
