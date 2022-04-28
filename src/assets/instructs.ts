@@ -228,27 +228,27 @@ export const insJSON = [
       {
         name: "ADD",
         cn: "加",
-        inst: "SETINT ${1:I001} = ${2:0}",
+        inst: "ADD ${1:I001} ${2:0}",
       },
       {
         name: "SUB",
         cn: "减",
-        inst: "SETDOUBLE ${1:D001} = ${2:0}",
+        inst: "SUB ${1:I001} ${2:0}",
       },
       {
         name: "MUL",
         cn: "乘",
-        inst: "SETBOOL ${1:B001} = ${2:0}",
+        inst: "MUL ${1:I001} ${2:0}",
       },
       {
         name: "DIV",
         cn: "除",
-        inst: "SETBOOL ${1:B001} = ${2:0}",
+        inst: "DIV ${1:I001} ${2:0}",
       },
       {
         name: "MOD",
         cn: "模",
-        inst: "SETBOOL ${1:B001} = ${2:0}",
+        inst: "MOD ${1:I001} ${2:0}",
       },
       {
         name: "SIN",
@@ -402,7 +402,7 @@ export const insJSON = [
       {
         name: "Msg_Connection_Status",
         cn: "获取网络状态",
-        inst: "MSG_CONN_ST ${1:1} ${1:B001}",
+        inst: "MSG_CONN_ST ${1:1} ${2:B001}",
       },
       {
         name: "Read_Come_Message",

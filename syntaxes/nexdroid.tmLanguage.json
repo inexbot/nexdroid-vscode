@@ -18,6 +18,9 @@
       "include": "#variables"
     },
     {
+      "include": "#support"
+    },
+    {
       "include": "#controls"
     },
     {
@@ -48,7 +51,7 @@
       "patterns": [
         {
           "name": "support.function.nexdroid",
-          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|SAMOV|MOVJEXT|MOVLEXT|MOVCEXT|EXTMOV|GEARIN|MRESET|POS_REACHABLE|READPOS|READPOSMSG|READLINEAR|POSADD|POSSUB|POSSET|COPYPOS|POSADDALL|POSSUBALL|POSSETALL|TOFFSETON|TOFFSETOFF|POS_STRETCH|SETPOSMSG|SWITCHTOOL|SWITCHUSER|TOOLFRAME_SET|USERFRAME_SET)\\b"
+          "match": "\\b(MOVJ|MOVL|MOVC|MOVCA|MOVS|IMOV|SAMOV|MOVJEXT|MOVLEXT|MOVCEXT|EXTMOV|GEARIN|MRESET)\\b"
         }
       ]
     },
@@ -56,7 +59,7 @@
       "patterns": [
         {
           "name": "keyword.control.nexdroid",
-          "match": "\\b(IF|ELSEIF|ELSE|WHILE|WAIT|ENDIF|ENDWHILE|JUMP|LABEL|UNTIL|ENDUNTIL|CLKSTART|CLKSTOP|CLKRESET|CRAFTLINE|CMDNOTE|POSREACHABLE)\\b"
+          "match": "\\b(IF|ELSEIF|ELSE|WHILE|WAIT|ENDIF|ENDWHILE|JUMP|LABEL|UNTIL|ENDUNTIL)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
@@ -64,7 +67,7 @@
         },
         {
           "name": "keyword.other.nexdroid",
-          "match": "\\b(DIN|DOUT|AIN|AOUT|READ_DOUT|SWITCHSYNC)\\b"
+          "match": "\\b(DIN|DOUT|AIN|AOUT|PULSEOUT|READ_DOUT|SWITCHSYNC|CRAFTLINE|CMDNOTE|SWITCHTOOL|SWITCHUSER|TOOLFRAME_SET|USERFRAME_SET)\\b"
         },
         {
           "name": "keyword.other.nexdroid",
@@ -79,19 +82,19 @@
     "calc": {
       "patterns": [
         {
-          "name": "support.other.nexdroid",
-          "match": "\\b(ADD|SUB|MUL|DIV|MOD|SIN|COS|ATAN|LOGICAL_OP|SETINT|SETDOUBLE|SETBOOL|FORCESET)\\b"
+          "name": "keyword.other.nexdroid",
+          "match": "\\b(ADD|SUB|MUL|DIV|MOD|SIN|COS|ATAN|LOGICAL_OP|SETINT|SETDOUBLE|SETBOOL|FORCESET|POS_REACHABLE|READPOS|READPOSMSG|READLINEAR|ENDREADLINEAR|POSADD|POSSUB|POSSET|COPYPOS|POSADDALL|POSSUBALL|POSSETALL|TOFFSETON|TOFFSETOFF|POS_STRETCH|SETPOSMSG|CLKSTART|CLKSTOP|CLKRESET)\\b"
         }
       ]
     },
     "parameters": {
       "patterns": [
         {
-          "name": "markup.italic.nexdroid",
+          "name": "support.class.nexdroid",
           "match": "\\b(VJ|V|PL|ACC|DEC|SPIN)\\b"
         },
         {
-          "name": "variable.parameter.nexdroid",
+          "name": "variable.language.nexdroid",
           "match": "\\b(RF|BF|TF|UF|TX|UX|TY|UY|TZ|UZ|TA|UA|TB|UB|TC|UC|GLOBAL|LOCAL|MAIN|ALL)\\b"
         }
       ]
@@ -99,7 +102,7 @@
     "variables": {
       "patterns": [
         {
-          "name": "constant.numeric.nexdroid",
+          "name": "variable.parameter.nexdroid",
           "match": "^[PSRE][0-9]{3}"
         },
         {
