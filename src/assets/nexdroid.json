@@ -48,9 +48,9 @@
         "P0002 = 0,0,0,0,0,0,0,0,0,0,0,0,0,0",
         "//带变位机坐标值的局部位置变量，在P点的基础上后面7位为变位机各个轴的值",
         "E0001 = 0,0,1,2,3,0,0,1,2,3,4,5,6,7,0,0,0,0,0,0,0",
-        "//AP变量中填入99999表示该轴不动",
-        "AP0001 = 1,1,0,0,0,0,0,1,99999,1,99999,99999,99999,0",
-        "RP0001 = 1,1,0,0,0,0,0,0,0,0,0,0,0,0",
+        "//R变量中填入99999表示该轴不动",
+        "R0001 = 1,1,0,0,0,0,0,1,99999,1,99999,99999,99999,0",
+        "S0001 = 1,1,0,0,0,0,0,0,0,0,0,0,0,0",
         "//局部数值变量",
         "INTV I001 = 1",
         "FLOATV D001 = 1.0000 ",
@@ -117,12 +117,12 @@
     },
     "IMOV": {
       "prefix": "IMOV",
-      "body": "IMOV ${1:RP0001} V = ${2:10} mm/s BF PL = 0 ACC = 1 DEC = 1 0",
+      "body": "IMOV ${1:S0001} V = ${2:10} mm/s BF PL = 0 ACC = 1 DEC = 1 0",
       "description": "增量插补，使用S变量，关节坐标时速度为VJ = 10 % ，其它时候为V = 10 mm/s RF-关节，BF-直角，TF-工具，UF-用户"
     },
     "SAMOV": {
       "prefix": "SAMOV",
-      "body": "SAMOV ${1:AP0002} VJ = ${2:10} % RF PL = 0 ACC = 10 DEC = 10 0",
+      "body": "SAMOV ${1:R0002} VJ = ${2:10} % RF PL = 0 ACC = 10 DEC = 10 0",
       "description": "走到绝对位置，使用R变量，关节坐标时速度为VJ = 10 % ，其它时候为V = 10 mm/s RF-关节，BF-直角，TF-工具，UF-用户"
     },
     "MOVJEXT": {
@@ -187,12 +187,12 @@
     },
     "DIN": {
       "prefix": "DIN",
-      "body": "DIN ${1|1,GI[I001]|} IN#(${2|I001,GI[GI002]|})",
+      "body": "DIN ${1:GI[I001]} IN#(${2:GI[GI002]})",
       "description": "将数字IO输入状态读入一个变量，IN#-读一个口，范围1-16。IGH#-读4个口，范围1-4。IG#-读8个口，范围1-2"
     },
     "DOUT": {
       "prefix": "DOUT",
-      "body": "DOUT OT#(${1|1,GI[I001]|}) ${2|1,GI[GI002]|} T = ${3|0,I001|} 0",
+      "body": "DOUT OT#(${1:GI[I001]}) ${2:GI[GI002]} T = 0",
       "description": "输出数字IO，DOUT 输出组，OT#-输出一个端口，OGH#-输出4个端口，OG#-输出8个端口 输出值，需将2进制转为10进制 T = 输出时间，填0表示无限时"
     },
     "AIN": {
@@ -217,12 +217,12 @@
     },
     "TIME": {
       "prefix": "TIMER",
-      "body": "TIMER T = ${1|10,GD[GI001]|}",
+      "body": "TIMER T = ${1:GD[GI001]}",
       "description": "延时设置的值，也可以通过变量设置，然后继续运行"
     },
     "CALL": {
       "prefix": "CALL",
-      "body": "CALL [\\$${1:ProgramName}\\$]",
+      "body": "CALL [\\$${1:DDD}\\$]",
       "description": "调用另一个程序，被调用程序运行完后则返回原程序 CALL 指令的下一行继续运行"
     },
     "IF": {
@@ -280,7 +280,7 @@
     },
     "POS_REACHABLE": {
       "prefix": "POS_REACHABLE",
-      "body": ["POS_REACHABLE ${1|MOVJ,MOVL,MOVC|} ${2:P0001} ${3:B001}"],
+      "body": ["POS_REACHABLE $(1:MOVJ) $(2:P0001) $(3:B001)"],
       "description": "到达判断指令，用于判断目标点是否能到达，点位能够到达变量置 1，不能到达置 0"
     },
 
@@ -320,7 +320,7 @@
     },
     "FORCESET": {
       "prefix": "FORCESET",
-      "body": "FORCESET ${1:GI001}",
+      "body": "FORCESET $(1:GI001)",
       "description": "在程序运行过程中，所有的计算、赋值操作均是对缓存中的数值进行更改的，并不会存入系统文件中， 即当程序运行停止后所有全局变量的值都会还原,若要强制将内容中的全局数值变量写入文件中， 则可以使用 FORCESET 指令 "
     },
     "ADD": {
@@ -370,22 +370,22 @@
     },
     "SWITCHTOOL": {
       "prefix": "SWITCHTOOL",
-      "body": "SWITCHTOOL (${1|GI001,1|})",
+      "body": "SWITCHTOOL (${1:0})",
       "description": "切换工具手到对应的序号"
     },
     "SWITCHUSER": {
       "prefix": "SWITCHUSER",
-      "body": "SWITCHUSER (${1|GI001,1|})",
+      "body": "SWITCHUSER (${1:0})",
       "description": "切换用户坐标到对应的序号"
     },
     "SWITCHSYNC": {
       "prefix": "SWITCHSYNC",
-      "body": "SWITCHSYNC ${1|GI001,1|}",
+      "body": "SWITCHSYNC ${1:0}",
       "description": "切换外部轴到对应的组号"
     },
     "USERCOORD_TRANS": {
       "prefix": "USERCOORD_TRANS",
-      "body": "USERCOORD_TRANS (${1:1} ${2:1} ${3:1})",
+      "body": "USERCOORD_TRANS (${1:1} ${2:1} {3:1})",
       "description": "将 B、C 用户坐标系叠加（×），结果置入 A 用户坐标系"
     },
     "SENDMSG": {
@@ -405,7 +405,7 @@
     },
     "PRINTMSG": {
       "prefix": "PRINTMSG",
-      "body": "PRINTMSG #${1:输出信息}#",
+      "body": "PRINTMSG ${1:#输出信息#}",
       "description": "通过提示条的方式打印字符串"
     },
     "MSG_CONNECTION_STATUS": {
@@ -465,12 +465,12 @@
     },
     "POSADDALL": {
       "prefix": "POSADDALL",
-      "body": "POSADDALL P0001 RF GD001 GD001 GI001 GI001 GD001 GD001 0 0 0 0 0 0 0 0",
+      "body": "POSADDALL P0001 RF 0 0 0 0 0 0 0",
       "description": "将位置变量所有轴均加上数值。位置变量-P0001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
     },
     "POSSUBALL": {
       "prefix": "POSSUBALL",
-      "body": "POSSUBALL P0001 RF GD001 GD001 GI001 GI001 GD001 GD001 0 0 0 0 0 0 0 0",
+      "body": "POSSUBALL P0001 RF 0 0 0 0 0 0 0",
       "description": "将位置变量所有轴均减去数值。位置变量-P0001、G001、P$GI001、G$I001。RF-关节，BF-直角，TF-工具，UF-用户。值可以为变量也可以为常量。"
     },
     "POSSETALL": {

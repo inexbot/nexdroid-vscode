@@ -91,7 +91,7 @@
       "patterns": [
         {
           "name": "support.class.nexdroid",
-          "match": "\\b(VJ|V|PL|ACC|DEC|SPIN)\\b"
+          "match": "\\b(VJ|V|PL|ACC|DEC|SPIN|AND|OR)\\b"
         },
         {
           "name": "variable.language.nexdroid",
@@ -103,11 +103,11 @@
       "patterns": [
         {
           "name": "variable.parameter.nexdroid",
-          "match": "^[PSRE][0-9]{3}"
+          "match": "^[PSRE][0-9]{4}"
         },
         {
           "name": "variable.parameter.nexdroid",
-          "match": "[G]?[PESR][0-9]{3}"
+          "match": "[G]?[PESR][0-9]{4}"
         },
         {
           "name": "variable.parameter.nexdroid",

@@ -119,6 +119,9 @@ function parseJobFile() {
   child = exec(
     parserPath + " " + activeFilePath,
     function (err: any, stdout: any, stderr: string) {
+      console.log("stdout", stdout);
+      console.log("stderr", stderr);
+      console.log(parserPath + " " + activeFilePath);
       if (editor == undefined) {
         return;
       }
