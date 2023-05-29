@@ -26,7 +26,7 @@ export function registerParse(context: vscode.ExtensionContext) {
     outputChannel.appendLine(`开始解析文件...`);
     outputChannel.show();
     workPath = context.globalStorageUri.fsPath;
-    parserPath = path.join(workPath, "/jobparser/jobparser.exe");
+    parserPath = path.join(workPath, "/jobparser/jobparser_22.07.exe");
     jobparserPath = path.join(workPath, "/jobparser");
     getVersion((version: string) => {
       if (version == "offline") {
