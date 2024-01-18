@@ -3,7 +3,7 @@
   "displayName": "奇创IDE",
   "description": "奇创机器人程序编辑",
   "publisher": "qichuang",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "icon": "qc.ico",
   "engines": {
     "vscode": "^1.66.0"
