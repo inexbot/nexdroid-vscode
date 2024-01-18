@@ -1,10 +1,10 @@
 {
-  "name": "nexdroid",
-  "displayName": "nexdroid",
-  "description": "纳博特科技机器人程序编辑",
-  "publisher": "inexbot",
+  "name": "qichuang-ide",
+  "displayName": "奇创IDE",
+  "description": "奇创机器人程序编辑",
+  "publisher": "qichuang",
   "version": "0.4.7",
-  "icon": "logo.png",
+  "icon": "qc.ico",
   "engines": {
     "vscode": "^1.66.0"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/inexbot/nexdroid-vscode.git"
+    "url": "https://github.com/"
   },
   "categories": [
     "Programming Languages"
@@ -81,7 +81,7 @@
       "activitybar": [
         {
           "id": "nexdroid-sidebar",
-          "title": "NexDroid开始！",
+          "title": "开始！",
           "icon": "./icon/sidebar.png"
         }
       ]
@@ -105,7 +105,7 @@
       },
       {
         "view": "nexdroid-instructs",
-        "contents": "没有检测到NexDroid系统的作业程序，请新建或打开一个"
+        "contents": "没有检测到奇创系统的作业程序，请新建或打开一个"
       }
     ]
   },
